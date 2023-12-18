@@ -1,0 +1,14 @@
+<odoo>
+  
+    <!-- actions opening views on models -->
+
+    <record  id="warehouse_type_action" model="ir.actions.act_window">
+      <field name="name">Tipos de Bodega</field>
+      <field name="res_model">cyclic.warehouse.type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+   
+    
+</odoo>

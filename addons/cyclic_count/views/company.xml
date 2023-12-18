@@ -1,0 +1,14 @@
+<odoo>
+  
+    <!-- actions opening views on models -->
+
+    <record id="company_action" model="ir.actions.act_window" >
+      <field name="name">Compañías</field>
+      <field name="res_model">res.company</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+   
+    
+</odoo>

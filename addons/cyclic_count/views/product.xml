@@ -1,0 +1,72 @@
+<odoo>
+  
+    <!-- actions opening views on models -->
+
+    <record id="cyclic_product_tree" model="ir.ui.view">
+      <field name="name">cyclic.product.tree</field>
+      <field name="model">cyclic.product</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Productos" multi_edit="1">
+          <!-- <field name="sequence" widget="handle"/> -->
+          <field name="product_code" readonly="1" />
+          <field name="name" />
+          <field name="unit_cost" />
+          <field name="warehouse_id"  />
+        </tree>
+      </field>
+    </record>
+    
+    <record id="cyclic_product_form" model="ir.ui.view">
+      <field name="name">cyclic.product.form</field>
+      <field name="model">cyclic.product</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_title">
+                <label for="name"/>
+              <h1>
+                  <field name="name"/>
+              </h1>
+          </div>
+            <group>
+              <group>
+  
+                <field name="product_code"/>
+                <field name="sku"/>
+                <field name="location_code"/>
+              </group>
+              <group>
+                <field name="unit_cost"/>
+                <field name="mu_id" />
+                <field name="category_id"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Ubicación">
+                <group>
+                  <group>
+                    <field name="warehouse_id" />
+                    <field name="whlocation_id" />
+                  </group>
+                </group>
+              </page>
+             
+            </notebook>
+          </sheet>
+        </form>
+  
+      </field>
+    </record>
+  
+
+
+    <record id="product_action" model="ir.actions.act_window" >
+      <field name="name">Productos</field>
+      <field name="res_model">cyclic.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+   
+    
+</odoo>

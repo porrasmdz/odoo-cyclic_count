@@ -1,0 +1,14 @@
+<odoo>
+  
+    <!-- actions opening views on models -->
+
+    <record  id="subdivision_type_action" model="ir.actions.act_window">
+      <field name="name">Tipos de Subdivision</field>
+      <field name="res_model">cyclic.subdivision.type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+   
+    
+</odoo>

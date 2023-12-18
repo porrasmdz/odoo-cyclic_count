@@ -1,0 +1,14 @@
+<odoo>
+  
+    <!-- actions opening views on models -->
+
+    <record  id="product_category_action" model="ir.actions.act_window">
+      <field name="name">Categorías de Producto</field>
+      <field name="res_model">cyclic.product.category</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+   
+    
+</odoo>
