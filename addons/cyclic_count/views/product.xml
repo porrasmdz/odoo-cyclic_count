@@ -11,7 +11,12 @@
           <field name="product_code" readonly="1" />
           <field name="name" />
           <field name="unit_cost" />
-          <field name="warehouse_id"  />
+          
+          <field name="system_units" string="U. Sistema" />
+          <field name="real_units" string="U. Reales" />
+          <field name="difference" string="Diferencia" />
+          
+          <field name="status" string="Estado" />
         </tree>
       </field>
     </record>
@@ -53,6 +58,10 @@
              
             </notebook>
           </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" />
+            <field name="message_ids" options="{'post_refresh': 'recipients'}" />
+          </div>
         </form>
   
       </field>

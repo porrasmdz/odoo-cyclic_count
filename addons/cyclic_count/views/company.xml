@@ -1,14 +1,41 @@
 <odoo>
+
+  <!-- actions opening views on models -->
+
+  <record id="company_action" model="ir.actions.act_window">
+    <field name="name">Compañías</field>
+    <field name="res_model">res.company</field>
+    <field name="view_mode">tree,form</field>
+  </record>
   
-    <!-- actions opening views on models -->
+  
+  <record id="view_company_form" model="ir.ui.view">
+    <field name="name">res.company.form</field>
+    <field name="model">res.company</field>
+    <field name="inherit_id" ref="base.view_company_form" />
+    <field name="arch" type="xml">
+      <field name="company_registry" position="attributes">
+        <attribute name="string">RUC</attribute>
+      </field>
+      <xpath expr="//page[@name='branches']" position="replace">
+        <page string="Bodegas" name="warehouses">
 
-    <record id="company_action" model="ir.actions.act_window" >
-      <field name="name">Compañías</field>
-      <field name="res_model">res.company</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+          <field name='warehouse_id' string="Bodegas" />
+        </page>
+      </xpath>
+      <xpath expr="//field[@name='zip']" position="replace" />
+      <xpath expr="//field[@name='vat']" position="replace" />
+      <xpath expr="//field[@name='website']" position="replace" />
+
+      <xpath expr="//field[@name='partner_id']" position="replace" />
+      <xpath expr="//field[@name='parent_id']" position="replace" />
+
+      <xpath expr="//field[@name='color']" position="replace" />
+
+      <xpath expr="//field[@name='currency_id']" position="replace" />
+
+    </field>
+  </record>
 
 
-   
-    
 </odoo>

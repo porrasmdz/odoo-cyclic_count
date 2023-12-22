@@ -18,7 +18,7 @@ Módulo de soporte del equipo de outsourcing de Excecon para optimizar y acelera
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': [ 'base'],
+    'depends': [ 'base', 'mail'],
 
     # always loaded
     'data': [
@@ -26,7 +26,9 @@ Módulo de soporte del equipo de outsourcing de Excecon para optimizar y acelera
         'views/cyclic_count.xml',
         'views/product_category.xml',
         'views/company.xml',
+        'data/sequence.xml',
         'views/product.xml',
+        'views/product_registry.xml',
         'views/warehouse.xml',
         'views/warehouse_type.xml',
         'views/subdivision_type.xml',

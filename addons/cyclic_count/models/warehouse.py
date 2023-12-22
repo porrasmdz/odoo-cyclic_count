@@ -15,4 +15,4 @@ class Warehouse(models.Model):
     whtype_id = fields.Many2one("cyclic.warehouse.type",string="Tipo de Bodega") #Materia Primo, Transito, etc...
     company_id = fields.Many2one("res.company",string="Compañía")
     # city_id = fields.Many2one("res.city",string="Ciudad")
-    partner_ids = fields.Many2many('res.partner', string="Encargados") #Modificar a One2Many, extendiendo res.partner en otro modelo
+    # partner_ids = fields.Many2many('res.partner', string="Encargados") #Modificar a One2Many, extendiendo res.partner en otro modelo

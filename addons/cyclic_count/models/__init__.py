@@ -13,3 +13,4 @@ from . import warehouse_subdivision
 from . import warehouse_type
 from . import subdivision_type
 
+from . import company
