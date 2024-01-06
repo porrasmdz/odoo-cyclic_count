@@ -1,6 +1,24 @@
 <odoo>
   
     <!-- actions opening views on models -->
+    <record id="cyclic_product_search" model="ir.ui.view">
+      <field name="name">cyclic.product.search</field>
+      <field name="model">cyclic.product</field>
+      <field name="arch" type="xml">
+        <search string="Búsqueda de Productos">
+          <field name="name" string="Nombre o Codigo"
+           filter_domain="['|', ('name', 'ilike', self), ('product_code', 'ilike', self)]"/>
+           
+          <field name="sku" string="Codigo o Sku"
+          filter_domain="['|', ('sku', 'ilike', self), ('product_code', 'ilike', self)]"/>
+          
+          <filter name="groupby_ccount" string="Conteo Cíclico" context="{'group_by': 'ccount_id'}"/>
+          <filter name="groupby_wh" string="Bodega" context="{'group_by': 'warehouse_id'}"/>
+          
+          <filter name="groupby_whsubdiv" string="Subdivision de Bodega" context="{'group_by': 'whlocation_id'}"/>
+        </search>
+      </field>
+    </record>
 
     <record id="cyclic_product_tree" model="ir.ui.view">
       <field name="name">cyclic.product.tree</field>
@@ -88,6 +106,9 @@
       <field name="name">Productos</field>
       <field name="res_model">cyclic.product</field>
       <field name="view_mode">tree,form</field>
+      
+      <field name="search_view_id" ref="cyclic_product_search"/>
+      <field name="context">{'search_default_groupby_ccount': 1, 'search_default_groupby_wh': 2, 'search_default_groupby_whsubdiv': 3}</field>
     </record>
 
 

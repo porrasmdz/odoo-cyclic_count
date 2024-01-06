@@ -97,17 +97,18 @@
                     <tree editable="top"  
                     decoration-success="status == 'even'"
                     decoration-danger="status == 'difference'"
-                    decoration-warning="status == 'corrected'">
+                    decoration-warning="status == 'corrected'"
+                    >
                       
                       <field name="name" string="Producto" readonly="1" />
                       
-                      <field name="location_code" string="Cod. Ubi." readonly="1" />
+                      <field name="location_code" string="Cod. Ubi." readonly="1"/>
                       
-                      <field name="warehouse_id" string="Cod. Ubi." readonly="1" />
-                      <field name="whlocation_id" string="Ubicacion" domain="[('warehouse_id','=',warehouse_id)]"/>
+                      <!-- <field name="warehouse_id" string="Cod. Ubi." readonly="1" /> -->
+                      <!-- <field name="whlocation_id" string="Ubicacion" domain="[('warehouse_id','=',warehouse_id)]"/> -->
                       <field name="unit_cost" string="Costo Unit." readonly="1" />
                       <field name="system_units" string="U. Sistema" readonly="1" />
-                      <field name="real_units" string="U. Físico" />
+                      <field name="real_units" string="U. Físico" readonly="[('approval_state','!=','available')]" />
                       <field name="difference" string="U. Diferencia" readonly="1" />
   
                       <field name="status" string="Estado" readonly="1" />
