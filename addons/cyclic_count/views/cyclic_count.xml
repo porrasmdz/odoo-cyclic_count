@@ -83,39 +83,56 @@
 
           <notebook>
             <page string="Conteo">
-
               <group>
-                <!-- Products-->
-                <field name="product_ids" string="Productos">
-                  <tree editable="top">
-                    <field name="name" string="Producto" readonly="1" />
-                    
-                    <field name="unit_cost" string="Costo Unit." />
-                    <field name="system_units" string="U. Sistema" />
-                    <field name="real_units" string="U. Físico" />
-                    <field name="difference" string="U. Diferencia" />
-
-                    <field name="status" string="Estado" />
-
-                  </tree>
-                </field>
-
-                <group>
-                  <field name="total_items" />
-
-                  <field name="total_system_cost" />
-                  <field name="units_difference" />
-
+                  
+                  
                 </group>
+              <sheet>
+                
                 <group>
+                  <!-- Products-->
+                  
 
-                  <field name="total_real_items" />
-                  <field name="total_real_cost" />
-                  <field name="difference_cost" />
-
+                  <field name="product_ids" string="Productos" >
+                    <tree editable="top"  
+                    decoration-success="status == 'even'"
+                    decoration-danger="status == 'difference'"
+                    decoration-warning="status == 'corrected'">
+                      
+                      <field name="name" string="Producto" readonly="1" />
+                      
+                      <field name="location_code" string="Cod. Ubi." readonly="1" />
+                      
+                      <field name="warehouse_id" string="Cod. Ubi." readonly="1" />
+                      <field name="whlocation_id" string="Ubicacion" domain="[('warehouse_id','=',warehouse_id)]"/>
+                      <field name="unit_cost" string="Costo Unit." readonly="1" />
+                      <field name="system_units" string="U. Sistema" readonly="1" />
+                      <field name="real_units" string="U. Físico" />
+                      <field name="difference" string="U. Diferencia" readonly="1" />
+  
+                      <field name="status" string="Estado" readonly="1" />
+                    </tree>
+                  </field>
+  
+                  <group>
+                    <field name="total_items" />
+  
+                    <field name="total_system_cost" />
+                    <field name="units_difference" />
+  
+                  </group>
+                  <group>
+  
+                    <field name="total_real_items" />
+                    <field name="total_real_cost" />
+                    <field name="difference_cost" />
+  
+                  </group>
                 </group>
-              </group>
+              </sheet>
+             
             </page>
+
           </notebook>
         </sheet>
         <div class="oe_chatter">

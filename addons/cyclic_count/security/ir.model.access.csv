@@ -10,3 +10,10 @@ access_cyclic_warehouse_type,cyclic.warehouse.type,model_cyclic_warehouse_type,b
 access_cyclic_subdivision_type,cyclic.subdivision.type,model_cyclic_subdivision_type,base.group_user,1,1,1,1
 
 access_cyclic_product_registry,cyclic.product.registry,model_cyclic_product_registry,base.group_user,1,1,1,1
+
+access_cyclic_warehouse_subdivision,cyclic.warehouse.subdivision,model_cyclic_warehouse_subdivision,base.group_user,1,1,1,1
+access_cyclic_warehouse_subdivision_stype,cyclic.warehouse.subdivision.stype,model_cyclic_warehouse_subdivision_stype,base.group_user,1,1,1,1
+access_cyclic_warehouse_subdivision_plocation,cyclic.warehouse.subdivision.plocation,model_cyclic_warehouse_subdivision_plocation,base.group_user,1,1,1,1
+access_cyclic_warehouse_subdivision_area,cyclic.warehouse.subdivision.area,model_cyclic_warehouse_subdivision_area,base.group_user,1,1,1,1
+access_cyclic_warehouse_subdivision_side,cyclic.warehouse.subdivision.side,model_cyclic_warehouse_subdivision_side,base.group_user,1,1,1,1
+access_cyclic_warehouse_subdivision_level,cyclic.warehouse.subdivision.level,model_cyclic_warehouse_subdivision_level,base.group_user,1,1,1,1

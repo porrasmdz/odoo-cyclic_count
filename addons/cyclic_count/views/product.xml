@@ -6,7 +6,10 @@
       <field name="name">cyclic.product.tree</field>
       <field name="model">cyclic.product</field>
       <field name="arch" type="xml">
-        <tree string="Lista de Productos" multi_edit="1">
+        <tree string="Lista de Productos" multi_edit="1"   
+        decoration-success="status == 'even'"
+        decoration-danger="status == 'difference'"
+        decoration-warning="status == 'corrected'">
           <!-- <field name="sequence" widget="handle"/> -->
           <field name="product_code" readonly="1" />
           <field name="name" />
@@ -39,11 +42,14 @@
                 <field name="product_code"/>
                 <field name="sku"/>
                 <field name="location_code"/>
+                <field name="system_units"/>
               </group>
               <group>
                 <field name="unit_cost"/>
                 <field name="mu_id" />
                 <field name="category_id"/>
+                
+                <field name="real_units"/>
               </group>
             </group>
             <notebook>
@@ -51,7 +57,16 @@
                 <group>
                   <group>
                     <field name="warehouse_id" />
-                    <field name="whlocation_id" />
+                    <field name="whlocation_id"  domain="[('warehouse_id','=',warehouse_id)]"/>
+                  </group>
+                </group>
+              </page>
+              <!-- Admins Only -->
+              <page string="Administración">
+                <group>
+                  <group>
+                    <field name="ccount_id" />
+                    
                   </group>
                 </group>
               </page>

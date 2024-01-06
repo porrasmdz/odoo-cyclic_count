@@ -33,7 +33,8 @@ class CyclicCount(models.Model):
     #Related Fields
     prev_ccount = fields.Many2one('cyclic.count', string="Conteo Previo")
     asignee_ids= fields.Many2many('res.users',string="Encargados")
-    product_ids = fields.Many2many('cyclic.product', string="Productos en Bodega")
+    
+    product_ids = fields.One2many('cyclic.product','ccount_id','Productos')#Many2many('cyclic.product', string="Productos en Bodega")
     warehouse_id= fields.Many2one('cyclic.warehouse',string="Bodega")
     
     @api.model_create_multi
@@ -127,13 +128,20 @@ class CyclicCount(models.Model):
                 record.status = "first"
     
     def duplicate_self(self):
-        new_rec_id = list(self.copy({'approval_state':'unavailable', 'active' : False ,'ref': self.ref}).get_external_id().keys())[0]
+        new_rec_id = list(self.copy({'approval_state':'unavailable', 'active' : False ,'ref': self.ref, 'name': "%s | (%s)" % (self.name, self.status)}).get_external_id().keys())[0]
         self.prev_ccount = new_rec_id
         
 
     def remove_even_products(self):
+        # This is done once cyclic count has archived itself
+        # Even prods are not removed just archived
         diff_prods = self.get_differences()
+        self.archive_even_products()
         self.product_ids = diff_prods
+
+    def archive_even_products(self):
+         even_prods = self.get_evens()
+         self.prev_ccount.product_ids = even_prods
 
     def action_finish_count(self):
         
@@ -164,9 +172,8 @@ class CyclicCount(models.Model):
                     self.status = 'finished'
                 return
             case 'third':
-                
                 self.duplicate_self()
-                
+                self.archive_even_products()
                 self.approval_state = 'unavailable'
                 self.status = 'finished'
                 return
@@ -194,8 +201,17 @@ class CyclicCount(models.Model):
         for product in self.product_ids:
            if product.status == 'difference':
                diff_products.append(list(product.get_external_id().keys())[0])
-               print("EL PRODUCTO NO CUADRADO ES: ", product)
+             
         return diff_products
+    
+    @api.depends('product_ids')
+    def get_evens(self):
+        even_products = []
+        for product in self.product_ids:
+           if product.status == 'even':
+               even_products.append(list(product.get_external_id().keys())[0])
+              
+        return even_products
         
 
 
@@ -203,3 +219,8 @@ class CyclicCount(models.Model):
         if(self.approval_state != 'available'):
             self.approval_state = 'available'
         return
+
+
+    
+   
+        

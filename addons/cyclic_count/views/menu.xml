@@ -4,13 +4,13 @@
      <menuitem id="cc_menu_root" name="Conteo Fisico Inventarios">
         <menuitem id="cc_first_menu" name="Conteos" sequence="1">
             <menuitem id="cc_first_menu_list" action="cyclic_count_action" name="Lista de Conteos"/>
+            <menuitem id="cc_second_menu_product_list" action="product_action" name="Productos"/>
 
         </menuitem>
 
         <menuitem  id="cc_second_menu" name="Compañías" sequence="2">
             <menuitem id="cc_second_menu_company_list" action="company_action" name="Compañías"/>
             <menuitem id="cc_second_menu_wh_list" action="warehouse_action" name="Bodegas"/>
-            <menuitem id="cc_second_menu_product_list" action="product_action" name="Productos"/>
         </menuitem> 
         
         <menuitem id="cc_third_menu" name="Categorías" sequence="3">

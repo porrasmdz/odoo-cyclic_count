@@ -42,6 +42,18 @@
               <field name="whtype_id"/>
             </group>
           </group>
+          <notebook>
+            <page string="Subdivisiones">
+              <group>
+                <field name="subdivision_ids">
+                  <tree>
+                    <field name="name" />
+                    <field name="subdiv_type"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
+          </notebook>
           <!-- <notebook>
             <page string="Encargados">
               <group>
