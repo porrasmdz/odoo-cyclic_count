@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo >
+    <record model="ir.module.category" id="module_category_excecon">
+        <field name="name">Excecon</field>
+        <field name="description">Category for Excecon</field>
+        <field name="sequence">45</field>
+    </record>
+    <record id="group_cyclic_operator" model="res.groups">
+        <field name="name">Operador</field>
+        <field name="category_id" ref="module_category_excecon"/>
+    </record>
+    <record id="group_cyclic_supervisor" model="res.groups">
+        <field name="name">Supervisor</field>
+        
+        <field name="implied_ids" eval="[(4, ref('group_cyclic_operator'))]"/>
+        <field name="category_id" ref="module_category_excecon"/>
+    </record>
+    <record id="group_cyclic_admin" model="res.groups">
+        <field name="name">Administrador</field>
+        
+        <field name="implied_ids" eval="[(4, ref('group_cyclic_supervisor'))]"/>
+        <field name="category_id" ref="module_category_excecon"/>
+    </record>
+    <record id="group_cyclic_director" model="res.groups">
+        <field name="name">Director</field>
+        <field name="category_id" ref="module_category_excecon"/>
+    </record>
+
+        
+        <record id="see_his_own_counts" model="ir.rule">
+            <field name="name">User Count Rule</field>
+            <field name="model_id" ref="model_cyclic_count"/>
+            <field name="domain_force">[('asignee_ids.id','=',user.id)]</field>
+            
+            <field name="groups" eval="[(4, ref('group_cyclic_operator'))]"/>
+            <field name="perm_unlink" eval="False"/>
+            
+        </record>
+        <record id="see_his_own_products" model="ir.rule">
+            <field name="name">User Product Rule</field>
+            <field name="model_id" ref="model_cyclic_product"/>
+            <field name="domain_force">[('ccount_id.asignee_ids.id','=',user.id)]</field>
+            
+            <field name="groups" eval="[(4, ref('group_cyclic_operator'))]"/>
+            
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        
+        <record id="see_all_counts" model="ir.rule">
+            <field name="name">Supervisor Count Rule</field>
+            <field name="model_id" ref="model_cyclic_count"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            
+            <field name="groups" eval="[(4, ref('group_cyclic_supervisor'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+      
+        <record id="see_all_products" model="ir.rule">
+            <field name="name">Supervisor Product Rule</field>
+            <field name="model_id" ref="model_cyclic_product"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            
+            <field name="groups" eval="[(4, ref('group_cyclic_supervisor'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <!-- <record id="see_all_counts" model="ir.rule">
+            <field name="name">Admin Product Rule</field>
+            <field name="model_id" ref="model_cyclic_count"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            
+            <field name="groups" eval="[(4, ref('group_cyclic_supervisor'))]"/>
+        </record> -->
+    
+</odoo>

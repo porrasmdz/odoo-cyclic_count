@@ -1,19 +1,31 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_cyclic_count,cyclic.count,model_cyclic_count,base.group_user,1,1,1,1
-access_cyclic_product,cyclic.product,model_cyclic_product,base.group_user,1,1,1,1
-access_cyclic_measure_unit,cyclic.measure.unit,model_cyclic_measure_unit,base.group_user,1,1,1,1
-access_cyclic_product_category,product.category.unit,model_cyclic_product_category,base.group_user,1,1,1,1
-access_cyclic_warehouse,cyclic.warehouse,model_cyclic_warehouse,base.group_user,1,1,1,1
 
-access_cyclic_warehouse_subdivision,cyclic.warehouse.subdivision,model_cyclic_warehouse_subdivision,base.group_user,1,1,1,1
-access_cyclic_warehouse_type,cyclic.warehouse.type,model_cyclic_warehouse_type,base.group_user,1,1,1,1
-access_cyclic_subdivision_type,cyclic.subdivision.type,model_cyclic_subdivision_type,base.group_user,1,1,1,1
+access_cyclic_count_admin,cyclic.count,model_cyclic_count,cyclic_count.group_cyclic_admin,1,1,1,1
+access_cyclic_product_admin,cyclic.product,model_cyclic_product,cyclic_count.group_cyclic_admin,1,1,1,1
 
-access_cyclic_product_registry,cyclic.product.registry,model_cyclic_product_registry,base.group_user,1,1,1,1
+access_cyclic_count_supervisor,cyclic.count,model_cyclic_count,cyclic_count.group_cyclic_supervisor,1,1,1,0
+access_cyclic_product_supervisor,cyclic.product,model_cyclic_product,cyclic_count.group_cyclic_supervisor,1,1,1,0
 
-access_cyclic_warehouse_subdivision,cyclic.warehouse.subdivision,model_cyclic_warehouse_subdivision,base.group_user,1,1,1,1
-access_cyclic_warehouse_subdivision_stype,cyclic.warehouse.subdivision.stype,model_cyclic_warehouse_subdivision_stype,base.group_user,1,1,1,1
-access_cyclic_warehouse_subdivision_plocation,cyclic.warehouse.subdivision.plocation,model_cyclic_warehouse_subdivision_plocation,base.group_user,1,1,1,1
-access_cyclic_warehouse_subdivision_area,cyclic.warehouse.subdivision.area,model_cyclic_warehouse_subdivision_area,base.group_user,1,1,1,1
-access_cyclic_warehouse_subdivision_side,cyclic.warehouse.subdivision.side,model_cyclic_warehouse_subdivision_side,base.group_user,1,1,1,1
-access_cyclic_warehouse_subdivision_level,cyclic.warehouse.subdivision.level,model_cyclic_warehouse_subdivision_level,base.group_user,1,1,1,1
+
+access_cyclic_count,cyclic.count,model_cyclic_count,cyclic_count.group_cyclic_operator,1,1,0,0
+access_cyclic_product,cyclic.product,model_cyclic_product,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse,cyclic.warehouse,model_cyclic_warehouse,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision,cyclic.warehouse.subdivision,model_cyclic_warehouse_subdivision,cyclic_count.group_cyclic_operator,1,1,1,0
+
+access_cyclic_measure_unit,cyclic.measure.unit,model_cyclic_measure_unit,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_product_category,product.category.unit,model_cyclic_product_category,cyclic_count.group_cyclic_operator,1,1,1,0
+
+access_cyclic_warehouse_type,cyclic.warehouse.type,model_cyclic_warehouse_type,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_subdivision_type,cyclic.subdivision.type,model_cyclic_subdivision_type,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision_stype,cyclic.warehouse.subdivision.stype,model_cyclic_warehouse_subdivision_stype,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision_plocation,cyclic.warehouse.subdivision.plocation,model_cyclic_warehouse_subdivision_plocation,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision_area,cyclic.warehouse.subdivision.area,model_cyclic_warehouse_subdivision_area,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision_side,cyclic.warehouse.subdivision.side,model_cyclic_warehouse_subdivision_side,cyclic_count.group_cyclic_operator,1,1,1,0
+access_cyclic_warehouse_subdivision_level,cyclic.warehouse.subdivision.level,model_cyclic_warehouse_subdivision_level,cyclic_count.group_cyclic_operator,1,1,1,0
+
+
+
+
+
+
+

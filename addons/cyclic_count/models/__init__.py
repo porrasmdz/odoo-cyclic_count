@@ -5,7 +5,6 @@ from . import cyclic_count
 
 from . import product
 from . import product_category
-from . import product_registry
 from . import measure_unit
 
 from . import warehouse

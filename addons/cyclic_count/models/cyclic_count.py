@@ -7,10 +7,12 @@ class CyclicCount(models.Model):
     _name = 'cyclic.count'
     _description = 'Conteo Cíclico'
     _inherit= 'mail.thread'
+
     ref= fields.Char(string="Reference", default=lambda self: ('Nuevo Conteo'))
     active = fields.Boolean(default=True , tracking=True)
 
-    name = fields.Char(string="Nombre", default="Nombre", tracking=True)
+    display_name = fields.Char(compute='_compute_display_name')
+    name = fields.Char(string="Nombre", default="", tracking=True)
     start_date = fields.Date(string="Fecha de conteo",default=fields.Datetime.today()+relativedelta(days=2))
     end_date= fields.Date(string="Fecha límite",default=fields.Datetime.today()+relativedelta(weeks=2,days=2))
 
@@ -30,6 +32,7 @@ class CyclicCount(models.Model):
     #Computed Fields
     company= fields.Many2one("res.company",string="Compañía", compute="_compute_wh_company")
     
+    is_supervisor = fields.Boolean(compute="_compute_is_supervisor")
     #Related Fields
     prev_ccount = fields.Many2one('cyclic.count', string="Conteo Previo")
     asignee_ids= fields.Many2many('res.users',string="Encargados")
@@ -37,10 +40,18 @@ class CyclicCount(models.Model):
     product_ids = fields.One2many('cyclic.product','ccount_id','Productos')#Many2many('cyclic.product', string="Productos en Bodega")
     warehouse_id= fields.Many2one('cyclic.warehouse',string="Bodega")
     
+    def _compute_display_name(self):
+        
+        for record in self:
+
+            name = "%s | %s" %(record.ref or '?', record.name or '?')
+            record.display_name = name
+        
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            vals['ref']= self.env['ir.sequence'].next_by_code('cyclic.count')
+            vals['ref']= "%s" % (self.env['ir.sequence'].next_by_code('cyclic.count'))#, vals['name']) 
         return super(CyclicCount, self).create(vals_list)
 
     @api.depends('product_ids')
@@ -223,4 +234,10 @@ class CyclicCount(models.Model):
 
     
    
-        
+    @api.depends("name")
+    def _compute_is_supervisor(self):
+        for record in self:
+            if(self.user_has_groups('cyclic_count.group_cyclic_supervisor,cyclic_count.group_cyclic_admin,cyclic_count.group_cyclic_director')):
+                record.is_supervisor = True
+            else:
+                record.is_supervisor = False

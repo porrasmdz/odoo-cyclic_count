@@ -24,20 +24,26 @@
       <field name="name">cyclic.product.tree</field>
       <field name="model">cyclic.product</field>
       <field name="arch" type="xml">
-        <tree string="Lista de Productos" multi_edit="1"   
-        decoration-success="status == 'even'"
-        decoration-danger="status == 'difference'"
-        decoration-warning="status == 'corrected'">
+        <tree string="Lista de Productos" multi_edit="1"  
+        decoration-success="is_supervisor and status == 'even'"
+                    decoration-danger="is_supervisor and status == 'difference'"
+                    decoration-warning="is_supervisor and status == 'corrected'">
           <!-- <field name="sequence" widget="handle"/> -->
+          <field name="is_supervisor" invisible="1" column_invisible="1"/>
           <field name="product_code" readonly="1" />
-          <field name="name" />
-          <field name="unit_cost" />
+          <field name="name" /> 
+          <field name="location_code" string="Cod. Ubi." readonly="1"/>
+                      
+          <field name="warehouse_id"  invisible="1" column_invisible="1"/>
+          <field name="whlocation_id"  domain="[('warehouse_id','=',warehouse_id)]"/>
+          <field name="unit_cost" groups="cyclic_count.group_cyclic_supervisor"/>
           
-          <field name="system_units" string="U. Sistema" />
+          <field name="system_units" string="U. Sistema"  groups="cyclic_count.group_cyclic_supervisor"/>
           <field name="real_units" string="U. Reales" />
-          <field name="difference" string="Diferencia" />
+          <field name="difference" string="Diferencia"  groups="cyclic_count.group_cyclic_supervisor"/>
+          <field name="status" string="Estado" readonly="1" invisible="not is_supervisor" column_invisible="[('is_supervisor', '=',False)]"  />
+                   
           
-          <field name="status" string="Estado" />
         </tree>
       </field>
     </record>
@@ -60,10 +66,10 @@
                 <field name="product_code"/>
                 <field name="sku"/>
                 <field name="location_code"/>
-                <field name="system_units"/>
+                <field name="system_units" groups="cyclic_count.group_cyclic_supervisor"/>
               </group>
               <group>
-                <field name="unit_cost"/>
+                <field name="unit_cost" groups="cyclic_count.group_cyclic_supervisor"/>
                 <field name="mu_id" />
                 <field name="category_id"/>
                 
@@ -80,7 +86,7 @@
                 </group>
               </page>
               <!-- Admins Only -->
-              <page string="Administración">
+              <page string="Administración" groups="cyclic_count.group_cyclic_admin">
                 <group>
                   <group>
                     <field name="ccount_id" />
@@ -91,7 +97,7 @@
              
             </notebook>
           </sheet>
-          <div class="oe_chatter">
+          <div class="oe_chatter" groups="cyclic_count.group_cyclic_supervisor">
             <field name="message_follower_ids" />
             <field name="message_ids" options="{'post_refresh': 'recipients'}" />
           </div>
@@ -108,7 +114,9 @@
       <field name="view_mode">tree,form</field>
       
       <field name="search_view_id" ref="cyclic_product_search"/>
-      <field name="context">{'search_default_groupby_ccount': 1, 'search_default_groupby_wh': 2, 'search_default_groupby_whsubdiv': 3}</field>
+      
+      <field name="domain">[('ccount_id.active','=',True)]</field>
+      <field name="context">{'search_default_groupby_ccount': 1, 'search_default_groupby_wh': 2}</field>
     </record>
 
 

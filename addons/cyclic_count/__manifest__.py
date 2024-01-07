@@ -22,13 +22,14 @@ Módulo de soporte del equipo de outsourcing de Excecon para optimizar y acelera
 
     # always loaded
     'data': [
+        
+        'security/cyclic_security.xml',
         'security/ir.model.access.csv',
         'views/cyclic_count.xml',
         'views/product_category.xml',
         'views/company.xml',
         'data/sequence.xml',
         'views/product.xml',
-        'views/product_registry.xml',
         'views/warehouse.xml',
         'views/warehouse_type.xml',
         'views/subdivision_type.xml',

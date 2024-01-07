@@ -15,15 +15,20 @@ class Product(models.Model):
 
     #Computed fields
     location_code = fields.Char(string="Codigo Ubicacion", compute="_compute_location_code", store=True)
+    
+    is_supervisor = fields.Boolean(compute="_compute_is_supervisor")
     #Related fields
     ccount_id= fields.Many2one("cyclic.count",string="Conteo")
+    
+    # active= fields.Boolean(compute="_compute_active")
+    
     warehouse_id= fields.Many2one("cyclic.warehouse",string="Bodega", tracking=True)
     whlocation_id = fields.Many2one("cyclic.warehouse.subdivision",string="Subdivision de Bodega", tracking=True)
     mu_id = fields.Many2one("cyclic.measure.unit", string="Unidades de Medida")
     category_id = fields.Many2one("cyclic.product.category", string="Categoría")
 
-
-    system_units = fields.Integer(default=0, string="Unidades Sistema",tracking=True)
+    is_edittable = fields.Boolean(compute="_compute_edittable_state") #Invisible
+    system_units = fields.Integer(default=0, string="Unidades Sistema",tracking=True )
     real_units = fields.Integer(default=0, string="Unidades Reales",tracking=True)
     
     #Computed fields
@@ -43,6 +48,37 @@ class Product(models.Model):
                     record.status = 'even'
                 case _:
                     record.status = 'difference'
+    @api.depends('ccount_id', 'ccount_id.approval_state')
+    def _compute_edittable_state(self):
+        for record in self:
+            if record.ccount_id and record.ccount_id.approval_state:
+                
+                if record.ccount_id.approval_state == 'unavailable':
+                    record.is_edittable = False
+                else:
+                    record.is_edittable = True
+            else:
+                record.is_edittable = False
+
+
+    def _compute_is_supervisor(self):
+        for record in self:
+            if(self.user_has_groups('cyclic_count.group_cyclic_supervisor,cyclic_count.group_cyclic_admin,cyclic_count.group_cyclic_director')):
+                record.is_supervisor = True
+            else:
+                record.is_supervisor = False
+                
+    # @api.depends('ccount_id', 'ccount_id.active')
+    # def _compute_active(self):
+    #     for record in self:
+    #         if record.ccount_id:
+                
+    #             record.active = record.ccount_id.active
+               
+    #         else:
+    #             record.active = True
+    
+   
 
     @api.depends('whlocation_id','warehouse_id')
     def _compute_location_code(self):
